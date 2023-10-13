@@ -12,7 +12,7 @@ increment=0
 @login_required(login_url='login')
 def index(request,i=0):
     print(request.user)
-    data=pd.read_csv(r"C:\Projects\ImageCarousel\Faiss\all_images_results_new.csv")
+    data=pd.read_csv(r"staticfiles\all_images_results_new.csv")
     context={
         'question':data['question'][i],
         'old_images':data['old_images'][i],
@@ -49,7 +49,7 @@ def index(request,i=0):
 @login_required(login_url='login')
 def vote(request,i):
     print(request.user)
-    data=pd.read_csv(r"C:\Projects\ImageCarousel\Faiss\all_images_results_new.csv")
+    data=pd.read_csv(r"staticfiles\all_images_results_new.csv")
     if request.method=='POST':
 
         choices=request.POST.getlist('answer')
@@ -65,16 +65,17 @@ def vote(request,i):
 def login(request):
     if request.method=='POST':
        username=request.POST.get('username','')
-       user=User.objects.get(username=username)
-       if user:
-        authenticate(user)
-        login_user(request,user=user)
-        return redirect('index',0)
-       else:
-        new_user=User.objects.create_user(username=username,password='yozu')
-        authenticate(new_user)
-        login_user(request,user=new_user)
-        return redirect('index',0)
+       users=User.objects.all()
+       for user in users:
+            if user.username == username:
+                authenticate(user)
+                login_user(request,user=user)
+                return redirect('index',0)
+       
+       new_user=User.objects.create_user(username=username,password='yozu')
+       authenticate(new_user)
+       login_user(request,user=new_user)
+       return redirect('index',0)
     
     return render(request,'login.html')
 def logout(request):
