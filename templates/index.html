@@ -78,9 +78,15 @@
                         </label>
                     </p>
                 </div>
-                <button class="btn waves-effect waves-light" type="submit" style="background: green; border-radius: 10px;"><strong>Submit</strong></button>
+                <button class="btn waves-effect waves-light" type="submit" style="background: green; border-radius: 10px;" onclick="toast()"><strong>Submit</strong></button>
             </form>  
         </div>
+        <script>
+            function toast(){
+
+                M.toast({html: 'Answered Successfully', classes: 'rounded green'});
+            }
+        </script>
           
     </div>
     <div class="row" style="margin-top: 0px; text-align: center; justify-content: center; align-items: center;">
