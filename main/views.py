@@ -12,7 +12,7 @@ increment=0
 @login_required(login_url='login')
 def index(request,i=0):
     print(request.user)
-    data=pd.read_csv(r"staticfiles\all_images_results_new.csv")
+    data=pd.read_csv(r".\static\all_images_results_new.csv")
     context={
         'question':data['question'][i],
         'old_images':data['old_images'][i],
@@ -49,7 +49,7 @@ def index(request,i=0):
 @login_required(login_url='login')
 def vote(request,i):
     print(request.user)
-    data=pd.read_csv(r"staticfiles\all_images_results_new.csv")
+    data=pd.read_csv(r".\static\all_images_results_new.csv")
     if request.method=='POST':
 
         choices=request.POST.getlist('answer')
