@@ -53,17 +53,14 @@ def vote(request,i):
     if request.method=='POST':
 
         choices=request.POST.getlist('answer')
-        if choices is list():
-            feedback=Feedback.objects.create(user=request.user)
-            feedback.question=data['question'][i]
-            for choice in choices:
-                choice_to_add=Choice.objects.get(name=choice)
-                feedback.selections.add(choice_to_add)
-                feedback.save()
-        else:
-            choice_to_add=Choice.objects.get(name=choices)
+        
+        feedback=Feedback.objects.create(user=request.user)
+        feedback.question=data['question'][i]
+        for choice in choices:
+            choice_to_add=Choice.objects.get(name=choice)
             feedback.selections.add(choice_to_add)
-            feedback.save()        
+            feedback.save()
+              
         print(choices)
     return redirect('index',i+1)
 
