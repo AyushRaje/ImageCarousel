@@ -56,7 +56,7 @@ def vote(request,i):
         feedback=Feedback.objects.create(user=request.user)
         feedback.question=data['question'][i]
         for choice in choices:
-            choice_to_add=Choice.objects.get(name=choice)
+            choice_to_add=Choice.objects.filter(name=choice)
             feedback.selections.add(choice_to_add)
             feedback.save()
         print(choices)
