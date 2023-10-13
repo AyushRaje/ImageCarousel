@@ -6,13 +6,15 @@ from django.contrib.auth import login as login_user
 from django.contrib.auth import logout as logout_user
 from django.contrib.auth.decorators import login_required
 from main.models import Feedback,Choice
+from django.templatetags.static import static
 # Create your views here.
 increment=0
 
 @login_required(login_url='login')
 def index(request,i=0):
     print(request.user)
-    data=pd.read_csv(r".\static\all_images_results_new.csv")
+    url = static('all_images_results_new.csv')
+    data=pd.read_csv(url)
     context={
         'question':data['question'][i],
         'old_images':data['old_images'][i],
@@ -48,8 +50,8 @@ def index(request,i=0):
 
 @login_required(login_url='login')
 def vote(request,i):
-    print(request.user)
-    data=pd.read_csv(r".\static\all_images_results_new.csv")
+    url = static('all_images_results_new.csv')
+    data=pd.read_csv(url)
     if request.method=='POST':
 
         choices=request.POST.getlist('answer')
