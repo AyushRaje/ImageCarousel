@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>Login</title>
+</head>
+<body>
+    <div class="container center">
+        <div class="col m6" style="align-items: center; justify-content: center; margin-top: 200px;">
+            <h4 class="header"><strong>Login</strong></h4>
+            <div class="card horizontal">
+              <div class="card-stacked">
+                <div class="card-content">
+                  <h6><strong>Use the same username</strong></h6>
+                  <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="text" placeholder="enter username" style="text-align: center;" name="username">
+                   
+                  
+                </div>
+                <div class="card-action">
+                    <button class="btn waves-effect waves-light" type="submit" style="background: green; border-radius: 10px;"><strong>Login</strong></button>
+                </div>
+              </div>
+            </form>
+            </div>
+          </div>
+    </div>
+    
+</body>
+</html>

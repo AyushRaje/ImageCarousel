@@ -1,0 +1,159 @@
+{% load mathfilters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
+
+    <title>Document</title>
+</head>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.carousel');
+    var instances = M.Carousel.init(elems);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.carousel').carousel();
+  });
+
+  
+</script>
+<body style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
+    <div class="container">
+
+        <h5 style="align-items: center; justify-content: center; align-content: center;">Ques: {{question}}
+            
+            <a class="waves-effect waves-light btn modal-trigger" href="#modal1" style="border-radius: 10px;">Answer</a>  
+            <form action="{% url 'index' increment|addition:1 %}" method="post">
+                {% csrf_token %}
+                <button class="btn waves-effect waves-light" type="submit" name="action" style="background: blue; border-radius: 10px;"><strong>Next-></strong></button>
+            </form>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button class="btn waves-effect waves-light" type="submit" name="action" style="background: red; border-radius: 10px; margin-top: 10px;"><strong>Logout</strong></button>
+            </form>
+        </h5>
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+            <h5>Answer</h5>
+            <p>{{answer}}</p>
+            </div>
+        </div> 
+        <div class="container center"><h5>Select</h5>
+            <form action="{% url 'vote' increment  %}" method="post">
+                {% csrf_token %}
+                <div class="row">
+
+                    <p>
+                        <label>
+                            <input type="checkbox" name="answer" value="old" />
+                            <span>old</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input type="checkbox" name="answer"  value="allmini" />
+                            <span>Allmini</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input type="checkbox" name="answer"  value="baai"/>
+                            <span>BAAI</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input type="checkbox" name="answer"  value="same"/>
+                            <span>Same</span>
+                        </label>
+                    </p>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit" style="background: green; border-radius: 10px;"><strong>Submit</strong></button>
+            </form>  
+        </div>
+          
+    </div>
+    <div class="row" style="margin-top: 0px; text-align: center; justify-content: center; align-items: center;">
+        <h5> Old Images</h5><a class="waves-effect waves-light btn modal-trigger" href="#modal2" style="border-radius: 10px;">Entities</a>
+        <div class="carousel" id="old">
+           
+            
+            {% for image in old_images %}
+                <a class="carousel-item" href="#one!"><div id="pic" style=" background-image: url({{image}}); height: 400px; width: 400px; display: flex; background-size: 400px; background-repeat: no-repeat;"> </div></a>
+        
+            {% endfor %}
+            
+        </div>
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+            <h5>Old Images</h5>
+            <p>{{old_entities}}</p>
+            </div>
+        </div>
+        
+       
+   
+    </div>
+     
+    <div class="row" style="margin-top: 0px; text-align: center; justify-content: center; align-items: center;">
+        <h5> Allmini Images</h5><a class="waves-effect waves-light btn modal-trigger" href="#modal3" style="border-radius: 10px;">Entities</a>
+        <div class="carousel" id="allmini">
+            {% for image in allmini_images %}
+                <a class="carousel-item" href="#one!"><div id="pic" style=" background-image: url({{image}}); height: 400px; width: 400px; display: flex; background-size: 400px; background-repeat: no-repeat;"> </div></a>
+            
+            {% endfor %}
+            
+        </div>
+        <div id="modal3" class="modal">
+            <div class="modal-content">
+            <h5>Allmini Images</h5>
+            <p>{{allmini_entities}}</p>
+            </div>
+        </div> 
+   
+   
+    </div>
+    <div class="row" style="margin-top: 20px; text-align: center; justify-content: center; align-items: center;">
+        <h5> BAAI Images</h5><a class="waves-effect waves-light btn modal-trigger" href="#modal4" style="border-radius: 10px;">Entities</a>
+        <div class="carousel" id="baai">
+            {% for image in baai_images %}
+                <a class="carousel-item" href="#one!"><div id="pic" style=" background-image: url({{image}}); height: 400px; width: 400px; display: flex; background-size: 400px; background-repeat: no-repeat;"> </div></a>
+            
+            {% endfor %}
+            
+        </div>
+        <div id="modal4" class="modal">
+            <div class="modal-content">
+            <h5>BAAI Images</h5>
+            <p>{{allmini_entities}}</p>
+            </div>
+        </div> 
+        
+    </div>
+          
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems);
+    });
+
+// Or with jQuery
+
+        $(document).ready(function(){
+            $('.modal').modal();
+        });
+
+    </script> 
+
+</body>
+</html>
