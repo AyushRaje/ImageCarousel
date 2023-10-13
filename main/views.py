@@ -61,7 +61,7 @@ def vote(request,i):
                 feedback.selections.add(choice_to_add)
                 feedback.save()
         else:
-            choice_to_add=Choice.objects.get(name=choice)
+            choice_to_add=Choice.objects.get(name=choices)
             feedback.selections.add(choice_to_add)
             feedback.save()        
         print(choices)
