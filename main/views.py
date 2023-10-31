@@ -7,6 +7,7 @@ from django.contrib.auth import logout as logout_user
 from django.contrib.auth.decorators import login_required
 from main.models import Feedback,Choice
 from django.templatetags.static import static
+import ast
 # Create your views here.
 increment=0
 
@@ -14,6 +15,21 @@ increment=0
 def index(request,i=0):
     print(request.user)
     data=pd.read_csv(r'static/all_images_results_new.csv')
+    allennlp_data=pd.read_csv(r'static/allennlp_results.csv')
+    ent_data=allennlp_data['allennlp_entities'].to_list()
+    ext_ent_data=allennlp_data['extracted_entities'].to_list()
+    image_data=allennlp_data['image_urls']
+    image_lists=image_data.apply(ast.literal_eval).to_list()
+    resultant_list=[]
+    print(ent_data)
+    print(ext_ent_data)
+    for m in image_lists:
+        new_list=[]
+        for j in m:
+           for k in j:
+                new_list.append(k)
+        resultant_list.append(new_list)
+    
     context={
         'question':data['question'][i],
         'old_images':data['old_images'][i],
@@ -41,6 +57,9 @@ def index(request,i=0):
         'old_entities':list(set(old_entities.split(','))),
         'allmini_entities':list(set(allmini_entities.split(','))),
         'baai_entities':list(set(baai_entities.split(','))),
+        'extracted_entities':ext_ent_data[i],
+        'allennlp_entities':ent_data[i],
+        'allennlp_images':resultant_list[i]
 
     }
     print(data)
@@ -83,5 +102,9 @@ def login(request):
 def logout(request):
     logout_user(request)
     return redirect('login')
+
+
+
+    
 if __name__=='__main__':
     index()

@@ -89,6 +89,32 @@
         </script>
           
     </div>
+
+    <div class="row" style="margin-top: 0px; text-align: center; justify-content: center; align-items: center;">
+        <h5> Allennlp </h5><a class="waves-effect waves-light btn modal-trigger" href="#modal7" style="border-radius: 10px;">Entities</a>
+        <div class="carousel" id="allennlp">
+           
+            
+            {% for image in allennlp_images %}
+                <a class="carousel-item" href="#one!"><div id="pic" style=" background-image: url({{image}}); height: 400px; width: 400px; display: flex; background-size: 400px; background-repeat: no-repeat;"> </div></a>
+        
+            {% endfor %}
+            
+        </div>
+        <div id="modal7" class="modal">
+            <div class="modal-content">
+            <h5>Allennlp</h5>
+            <p>Allennlp Entities: {{allennlp_entities}}</p>
+            <p>Extracted Entities: {{extracted_entities}}</p>
+            </div>
+        </div>
+        
+       
+   
+    </div>
+
+
+
     <div class="row" style="margin-top: 0px; text-align: center; justify-content: center; align-items: center;">
         <h5> Old Images</h5><a class="waves-effect waves-light btn modal-trigger" href="#modal2" style="border-radius: 10px;">Entities</a>
         <div class="carousel" id="old">
