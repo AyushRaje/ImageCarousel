@@ -15,7 +15,7 @@ increment=0
 def index(request,i=0):
     print(request.user)
     data=pd.read_csv(r'static/all_images_results_new.csv')
-    allennlp_data=pd.read_csv(r'static/allennlp_results.csv')
+    allennlp_data=pd.read_csv(r'static/allennlp_np_question_results_sorted.csv')
     ent_data=allennlp_data['allennlp_entities'].to_list()
     ext_ent_data=allennlp_data['extracted_entities'].to_list()
     image_data=allennlp_data['image_urls']
